@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  next-front:
+    container_name: next-front
+    build:
+      context: ./next-front
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./next-front:/app  # Next.js のコードをマウント
+      - /app/node_modules  # ホストの node_modules を除外（Next.js の依存関係を分離）
+    working_dir: /app
+    stdin_open: true
+    tty: true
+    env_file:
+      - ./next-front/.env.local  # Next.js の環境変数
+    depends_on:
+      - php-back  # Laravel のバックエンドが依存関係
+
+  java-back:
+    container_name: java-back
+    build:
+      context: ./java-back
+    ports:
+      - "8081:8080"  # ホスト8081をコンテナ内の8080(tomcatのデフォルト)にマッピング
+    depends_on:
+      - postgres  # データベースが起動している必要がある
+
+  php-back:
+    container_name: php-back
+    build:
+      context: ./php-back
+    ports:
+      - "8082:8000"  # Laravel の PHP サーバーポート8000
+    volumes:
+      - ./php-back:/var/www/html  # Laravel のディレクトリを /var/www/html に統一
+      - ./php-back/composer.json:/var/www/html/composer.json  # Laravel の composer.json をマウント
+      - ./php-back/composer.lock:/var/www/html/composer.lock  # Laravel の composer.lock をマウント
+      - ./php-back/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh  # エントリーポイントスクリプトをマウント
+      - /var/www/html/node_modules  # Laravel の node_modules を除外
+    working_dir: /var/www/html
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - APP_KEY=base64:your_laravel_key_here
+      - DB_CONNECTION=pgsql
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=mydatabase
+      - DB_USERNAME=user
+      - DB_PASSWORD=password
+    depends_on:
+      postgres:
+        condition: service_healthy  # PostgreSQL が正常に起動しているかチェック
+    entrypoint: ["/usr/local/bin/docker-entrypoint.sh"]  # ENTRYPOINT 設定
+    command: ["/bin/sh", "-c", "npm install && php artisan serve --host=0.0.0.0 --port=8000"]  # Laravel サーバーを起動（npm install も実行）
+
+  postgres:
+    container_name: postgres
+    image: postgres:17
+    environment:
+      POSTGRES_USER: user  # PostgreSQL のユーザー名
+      POSTGRES_PASSWORD: password  # PostgreSQL のパスワード
+      POSTGRES_DB: mydatabase  # 使用するデータベース名
+    ports:
+      - "5432:5432"  # ホストの5432ポートをコンテナ内の5432ポートにマッピング
+    volumes:
+      - pgdata:/var/lib/postgresql/data  # データの永続化設定
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready --quiet -U user -d mydatabase"]  # --quiet でログを減らす
+      interval: 10s
+      timeout: 5s
+      retries: 5  # 5回試行してダメなら失敗
+
+volumes:
+  pgdata:  # PostgreSQL のデータ永続化

@@ -1,0 +1,115 @@
+# =======================
+# 　 共通設定 (全プロジェクト)
+# =======================
+.DS_Store
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.vscode/
+.idea/
+.env
+.env.local
+.env.development
+.env.production
+.env.testing
+postgres-data/
+
+# =======================
+# 　 Next.js (next-front)
+# =======================
+next-front/.next/
+next-front/out/
+next-front/.eslintcache
+next-front/.turbo/
+next-front/build/
+next-front/dist/
+next-front/.vercel/
+next-front/.swc/
+
+# =======================
+# 　Laravel (php-back)
+# =======================
+php-back/vendor/
+php-back/bootstrap/cache/
+php-back/storage/
+php-back/storage/logs/
+php-back/storage/framework/
+php-back/storage/app/public/
+php-back/node_modules/
+php-back/public/hot
+php-back/public/storage
+php-back/.phpunit.result.cache
+php-back/database/*.sqlite
+php-back/database/*.sqlite-journal
+
+# Composer
+php-back/composer.lock
+php-back/composer.phar
+
+# Laravel IDE Helper
+php-back/_ide_helper.php
+php-back/.phpstorm.meta.php
+php-back/.phpunit.result.cache
+
+# =======================
+# 　Spring Boot (java-back)
+# =======================
+java-back/target/
+java-back/.mvn/
+java-back/mvnw
+java-back/mvnw.cmd
+java-back/.gradle/
+java-back/build/
+java-back/out/
+java-back/logs/
+java-back/.idea/
+java-back/.settings/
+java-back/.project
+java-back/.classpath
+java-back/.factorypath
+
+# Maven
+java-back/pom.xml.tag
+java-back/pom.xml.releaseBackup
+java-back/pom.xml.versionsBackup
+java-back/*.iml
+
+# Gradle
+java-back/gradle/
+java-back/.gradle/
+java-back/gradlew
+java-back/gradlew.bat
+java-back/gradle.properties
+java-back/gradle-wrapper.jar
+java-back/gradle-wrapper.properties
+java-back/gradle/libs/
+java-back/gradle/caches/
+java-back/gradle/daemon/
+java-back/gradle/gradle-app/
+java-back/gradle/build/
+
+# =======================
+# 　 Docker (全プロジェクト)
+# =======================
+**/docker-compose.override.yml
+**/.dockerignore
+**/docker/data/
+**/docker/db-data/
+**/docker/tmp/
+**/docker/logs/
+**/docker/nginx/cache/
+**/docker/nginx/logs/
+
+# =======================
+# 　その他
+# =======================
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*.swn
+*.log
+*.lock
+*.bak

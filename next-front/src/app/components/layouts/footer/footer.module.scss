@@ -1,0 +1,55 @@
+.footer {
+    background-color: #1e1e1e; // ダークモード背景
+    color: #ffffff;
+    padding: 1.5rem 0;
+    text-align: center;
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+
+      @media (min-width: 768px) {
+        flex-direction: row;
+        padding: 0 2rem;
+      }
+    }
+
+    .menu {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+
+      a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+
+        &:hover {
+          color: #00bcd4; // モダンなブルー系のホバーエフェクト
+        }
+      }
+    }
+
+    .socialIcons {
+      display: flex;
+      gap: 1rem;
+
+      a {
+        color: #ffffff;
+        font-size: 1.5rem;
+        transition: color 0.3s;
+
+        &:hover {
+          color: #00bcd4;
+        }
+      }
+    }
+
+    .copyRight {
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+  }

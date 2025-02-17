@@ -1,0 +1,110 @@
+// ヘッダーのベース
+.header {
+    background: #0a2540; // 深いブルー
+    color: #fff;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    height: 14vh;
+    @media (max-width: 768px) {
+        height: 7vh;
+    }
+}
+
+  // コンテナ
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  // ロゴ
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+    &:hover {
+      color: #4fc3f7;
+    }
+  }
+
+  // ナビゲーション (PC用)
+  .nav {
+    display: flex;
+    gap: 20px;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  // ナビゲーションアイテム
+  .navItem {
+    font-size: 16px;
+    position: relative;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #4fc3f7;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: #4fc3f7;
+      left: 50%;
+      bottom: -5px;
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+
+    &:hover::after {
+      width: 100%;
+      left: 0;
+    }
+  }
+
+  // ハンバーガーメニューのボタン
+  .menuButton {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+
+    @media (max-width: 768px) {
+      display: block;
+    }
+  }
+
+  // モバイルメニュー
+  .mobileNav {
+    background: rgba(10, 37, 64, 0.9);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+  }
+
+  // モバイルのナビアイテム
+  .mobileNavItem {
+    display: block;
+    padding: 10px;
+    font-size: 18px;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #4fc3f7;
+    }
+  }

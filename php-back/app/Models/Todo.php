@@ -19,23 +19,4 @@ class Todo extends Model
         'is_completed',
         'user_id'
     ];
-
-    // 初期表示のための一覧取得未完了タスクの取得
-    public static function getIncompleteTodos(): object|null
-    {
-        Log::info('一覧取得メソッド通過');
-        $inCompleteTodos = self::where('is_completed', false)->get();
-
-        return $inCompleteTodos;
-    }
-
-    // 完了タスクに完了フラグをつけて更新
-    public static function maskAsCompleted(int $id): object|null
-    {
-        $todos = self::find($id);
-        $todos->is_completed = true;
-        $todos->save();
-
-        return $todos;
-    }
 }

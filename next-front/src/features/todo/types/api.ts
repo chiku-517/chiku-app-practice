@@ -1,8 +1,8 @@
 import axios from "axios";
 
 // APIのベースURLを取得し、デフォルト値を設定
-const API_URL = process.env.NEXT_PUBLIC_PHP_API_BASE_URL
-    ? `${process.env.NEXT_PUBLIC_PHP_API_BASE_URL}/api/todos`
+const API_URL = process.env.NEXT_PHP_API_BASE_URL
+    ? `${process.env.NEXT_PHP_BASE_URL}/todos`
     : "http://localhost:8082/api/todos";
 
 // Todoの型定義

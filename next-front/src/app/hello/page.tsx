@@ -6,11 +6,11 @@ type HelloWorld = {
 };
 
 export default async function HelloPage() {
-  const apiBaseUrl = process.env.NEXT_PUBLIC_JAVA_API_BASE_URL;
+  const apiBaseUrl = process.env.NEXT_JAVA_API_BASE_URL;
   let message = '通信失敗です';
 
   try {
-    const response = await axios.get<HelloWorld>(`${apiBaseUrl}/api/hello`);
+    const response = await axios.get<HelloWorld>(`${apiBaseUrl}/hello`);
     message = response.data.message;
   } catch (error) {
     console.error('通信失敗:', error);
